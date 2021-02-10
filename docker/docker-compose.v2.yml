@@ -22,7 +22,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: test@test.com
       PGADMIN_DEFAULT_PASSWORD: 12345678
     ports:
-      - 8082:80
+      - 8085:80
     networks:
       - testing_net_cunor
 
