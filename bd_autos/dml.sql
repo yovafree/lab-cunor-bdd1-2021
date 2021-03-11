@@ -69,3 +69,68 @@ WHERE fa.cod_cliente IS NULL;
 SELECT cl.*, fa.*
 FROM factura fa, cliente cl
 WHERE fa.cod_cliente = cl.cod_cliente;
+
+-- ORDER BY
+
+SELECT *
+FROM auto
+ORDER BY modelo DESC, marca DESC;
+
+SELECT cod_factura, fec_factura, no_placa, monto * 3 AS valor
+FROM factura
+ORDER BY valor ASC
+
+-- GROUP BY, HAVING
+
+SELECT cl.nombre || ' ' || cl.apellido AS cliente, SUM(fa.monto) AS total
+FROM factura fa
+INNER JOIN cliente cl ON fa.cod_cliente = cl.cod_cliente
+GROUP BY cliente
+ORDER BY total DESC
+
+SELECT fec_factura, SUM(monto) AS total
+FROM factura
+GROUP BY fec_factura
+
+SELECT emp.nombre || ' ' || emp.apellido AS empleado, SUM(fa.monto) AS total
+FROM factura fa
+INNER JOIN empleado emp ON fa.cod_empleado = emp.cod_empleado
+GROUP BY empleado
+ORDER BY total DESC
+
+
+-- HAVING
+
+SELECT emp.nombre || ' ' || emp.apellido AS empleado, SUM(fa.monto) AS total
+FROM factura fa
+INNER JOIN empleado emp ON fa.cod_empleado = emp.cod_empleado
+GROUP BY empleado
+HAVING SUM(fa.monto) > 1900
+ORDER BY total DESC
+
+-- LIKE, UPPER, INITCAP, LOWER
+
+SELECT cod_cliente, INITCAP(nombre || ' ' || apellido) AS cliente
+FROM cliente
+WHERE UPPER(nombre || ' ' || apellido) LIKE UPPER('%AR%')
+
+-- BETWEEN
+
+SELECT * 
+FROM factura
+WHERE fec_factura BETWEEN DATE('2021-02-27') AND DATE('2021-03-05')
+
+
+--- VISTAS
+
+DROP  VIEW vw_venta_empleado;
+
+CREATE VIEW vw_venta_empleado AS
+SELECT emp.nombre || ' ' || emp.apellido AS empleado, SUM(fa.monto) AS total
+FROM factura fa
+INNER JOIN empleado emp ON fa.cod_empleado = emp.cod_empleado
+GROUP BY empleado
+ORDER BY total DESC;
+
+SELECT *
+FROM vw_venta_empleado;

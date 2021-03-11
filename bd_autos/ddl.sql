@@ -138,3 +138,9 @@ VALUES (current_date, 2,'C-987RD', 2, 1800, 'Servicio general');
 
 INSERT INTO factura(fec_factura, cod_empleado, no_placa, cod_cliente, monto, descripcion)
 VALUES (current_date, 1,'C-658QR', 3, 5000, 'Cambio de transmisión');
+
+INSERT INTO factura(fec_factura, cod_empleado, no_placa, cod_cliente, monto, descripcion)
+VALUES (current_date, 1,'C-658QR', 3, 900, 'Cambio de aceite');
+
+INSERT INTO factura(fec_factura, cod_empleado, no_placa, cod_cliente, monto, descripcion)
+VALUES (current_date, 1,'C-658QR', 2, 900, 'Cambio de culata');
